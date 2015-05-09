@@ -11,6 +11,7 @@
           <set>
             <option value="/daten/srv/linuxcounter.android.app" />
             <option value="/daten/srv/linuxcounter.android.app/app" />
+            <option value="/daten/srv/linuxcounter.android.app/volley" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file:///daten/srv/linuxcounter.android.app/app/app.iml" filepath="/daten/srv/linuxcounter.android.app/app/app.iml" />
       <module fileurl="file:///daten/srv/linuxcounter.android.app/linuxcounter.android.app.iml" filepath="/daten/srv/linuxcounter.android.app/linuxcounter.android.app.iml" />
+      <module fileurl="file:///daten/srv/linuxcounter.android.app/volley/volley.iml" filepath="/daten/srv/linuxcounter.android.app/volley/volley.iml" />
     </modules>
   </component>
 </project>

@@ -53,25 +53,8 @@
 		        android:layout_marginTop="7dp"
 		        android:ems="10"
 		        android:inputType="number" />
-		
-		    <TextView
-		        android:id="@+id/textView3"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="26dp"
-		        android:text="@string/enter_updatekey"
-		        android:textAppearance="?android:attr/textAppearanceLarge"
-		        android:textSize="16sp" />
-		
-		    <EditText
-		        android:id="@+id/editText3"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_gravity="center"
-		        android:ems="10"
-		        android:inputType="number" />
-		
-		    <Button
+
+			<Button
 		        android:id="@+id/button2"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"

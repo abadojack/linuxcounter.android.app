@@ -1,14 +1,5 @@
 package com.linuxcounter.lico_update_app;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import com.linuxcounter.lico_update_app.R;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +8,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StatFs;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,15 +18,26 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class getSysInfo extends Activity implements OnClickListener {
 
-	public String sAppVersion = "0.0.4";
+	public String sAppVersion = "0.0.1";
 	
-	static String senddata = null;
-	
+	static String aSendData[] = {};
+
+	final String TAG = "MyDebugOutput";
+
 	@SuppressWarnings("deprecation")
 	@SuppressLint({ "NewApi", "SdCardPath" })
 	protected void onCreate(Bundle savedInstanceState) {
+		Log.i(TAG, "getSysInfo: onCreate...");
+
 		String toks[] = null;
 		String MemTotalt = null;
 		int MemTotal = 0;
@@ -46,7 +50,7 @@ public class getSysInfo extends Activity implements OnClickListener {
 		String cpumodel = null;
 		String scpunum = null;
 		int cpunum = 0;
-		
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.get_sys_info);
 		
@@ -57,10 +61,12 @@ public class getSysInfo extends Activity implements OnClickListener {
 	    TextView myText = new TextView(this);
 	    
 	    System.getProperty("user.region");
-	    
+
 	    String androidversion;
 	    androidversion = System.getProperty("http.agent").replaceAll(".*Android *([0-9.]+).*", "$1");
-	    
+
+		Log.i(TAG, "getSysInfo: androidversion: "+androidversion);
+
 	    System.getProperty("os.version");
 	    
 	    Point size = new Point();
@@ -82,7 +88,9 @@ public class getSysInfo extends Activity implements OnClickListener {
 	    } catch(IOException ex) {
 	    	ex.printStackTrace();
 	    }
-	    String cpuinfo = "";
+		Log.i(TAG, "getSysInfo: loadavg: "+loadavg);
+
+		String cpuinfo = "";
 		try {
 			cpuinfo = getStringFromFile("/proc/cpuinfo").replace("\r", "").replace("\n\n", "\n");
 			toks = cpuinfo.split("\n");
@@ -105,7 +113,9 @@ public class getSysInfo extends Activity implements OnClickListener {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	    
+		Log.i(TAG, "getSysInfo: cpumodel: "+cpumodel);
+		Log.i(TAG, "getSysInfo: cpunum: "+cpunum);
+
 	    String flags = "";
 		try {
 			flags = getStringFromFile("/proc/cpuinfo").replace("\r", "").replace("\n\n", "\n");
@@ -121,6 +131,7 @@ public class getSysInfo extends Activity implements OnClickListener {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		Log.i(TAG, "getSysInfo: flags: "+flags);
 	    
 	    String meminfo = "";
 		try {
@@ -151,7 +162,11 @@ public class getSysInfo extends Activity implements OnClickListener {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	    
+		Log.i(TAG, "getSysInfo: MemTotal: "+MemTotal);
+		Log.i(TAG, "getSysInfo: MemFree: "+MemFree);
+		Log.i(TAG, "getSysInfo: SwapTotal: "+SwapTotal);
+		Log.i(TAG, "getSysInfo: SwapFree: "+SwapFree);
+
 		long total = 0;
 		long avail = 0;
 		File dir = null;
@@ -176,37 +191,37 @@ public class getSysInfo extends Activity implements OnClickListener {
 			avail = FreeMemoryOfDir(sdpath);
 			extexists = true;
 		}
-		
+
 		long disktotal = 0;
 		if (extexists == true) {
 			disktotal = TotalMemory() + total;
 		} else {
 			disktotal = TotalMemory();
 		}
-		
+		Log.i(TAG, "getSysInfo: disktotal: "+disktotal);
+
 		long freedisk = 0;
 		if (extexists == true) {
 			freedisk = FreeMemory() + avail;
 		} else {
 			freedisk = FreeMemory();
 		}
-		
+		Log.i(TAG, "getSysInfo: freedisk: "+freedisk);
+
 		String hostname = "localhost";
 		String filename = ".linuxcounter";
 		String filepath = Environment.getExternalStorageDirectory()+ "/data/com.linuxcounter.lico_update_app";
 		File readFile = new File(filepath, filename);
-        String counter_number = "";
-        String machine_number = "";
-        String update_key = "";
+        String machine_id = "";
+        String machine_updatekey = "";
 		String load = "";
 		try {
 	    	BufferedReader reader = new BufferedReader( new InputStreamReader( new FileInputStream(readFile) ), 1000 );
 	        load = reader.readLine();
 	        reader.close();
 	        String[] toks1 = load.split(" ");
-	        counter_number = (String)toks1[0];
-	        machine_number = (String)toks1[1];
-	        update_key = (String)toks1[2];
+			machine_id = (String)toks1[0];
+			machine_updatekey = (String)toks1[1];
 		} catch(Exception e1) {
 			// Do nothing
 		}
@@ -222,10 +237,14 @@ public class getSysInfo extends Activity implements OnClickListener {
 				version = "unknown";
 			}
 		}
-		
+		Log.i(TAG, "getSysInfo: machine: "+machine);
+		Log.i(TAG, "getSysInfo: version: "+version);
+
 		String uptime = Command("uptime").trim();
 		String[] toks2 = uptime.split(", ");
 		uptime = toks2[0].replace("up time: ", "").trim();
+		Log.i(TAG, "getSysInfo: uptime: "+uptime);
+
 		String cpufreqt = "0";
 		try {
 			cpufreqt = getStringFromFile("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq").trim();
@@ -235,44 +254,57 @@ public class getSysInfo extends Activity implements OnClickListener {
 		}
 		Float cpufreq = Float.parseFloat(cpufreqt);
 		cpufreq = (cpufreq / 1024);
-		
-		senddata = 
-				"lico-update.app version " + sAppVersion + "##" +
-				hostname + "##" +
-				counter_number + "##" +
-				machine_number + "##" +
-				cpumodel + "##" +
-				cpunum + "##" +
-				"1" + "##" +
-				disktotal + "##" +
-				MemTotal + "##" +
-				"1" + "##" +
-				freedisk + "##" +
-				MemFree + "##" +
-				SwapTotal + "##" +
-				SwapFree + "##" +
-				flags + "##" +
-				machine + "##" +
-				version + "##" +
-				uptime + "##" +
-				loadavg + "##" +
-				cpufreq + "##" +
-				"Android" + "##" +
-				androidversion + "##" +
-				"online" + "##" +
-				update_key;
-				
+		Log.i(TAG, "getSysInfo: cpufreq: "+cpufreq);
+
+
+		String url = "http://api.linuxcounter.net/v1/machines/" + machine_id;
+
+		boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
+		String deviceclass = "Smartphone";
+		if (tabletSize) {
+			deviceclass = "Tablet";
+		}
+		Log.i(TAG, "getSysInfo: deviceclass: "+deviceclass);
+
+		TelephonyManager tm = (TelephonyManager)getSystemService(getApplicationContext().TELEPHONY_SERVICE);
+		String countryCode = tm.getNetworkCountryIso();
+		Log.i(TAG, "getSysInfo: countryCode: "+countryCode);
+
+		aSendData = new String[] {
+				"url#" + url,
+				"machine_id#" + machine_id,
+				"machine_updatekey#" + machine_updatekey,
+				"appversion" + sAppVersion,
+				"hostname#" + hostname,
+				"cores#" + cpunum,
+				"flags#" + flags,
+				"diskspace#" + disktotal,
+				"diskspaceFree#" + freedisk,
+				"memory#" + MemTotal,
+				"memoryFree#" + MemFree,
+				"swap#" + SwapTotal,
+				"swapFree#" + SwapFree,
+				"distversion#" + androidversion,
+				"online#1",
+				"uptime#" + uptime,
+				"loadavg#" + loadavg,
+				"distribution#Android",
+				"kernel#" + version,
+				"cpu#" + cpumodel,
+				"country#" + countryCode.toUpperCase(),
+				"architecture#" + machine,
+				"class#" + deviceclass
+		};
+
 	    String sysinformation = 
-	    		"script : lico-update app " + sAppVersion + "\n" +
 	    	    "hostname : " + hostname + "\n" +
-	    		"counter_number : " + counter_number + "\n" +
-	    		"machine_number : " + machine_number + "\n" +
-	    		"processor : " + cpumodel + "\n" +
+	    		"machine_id : " + machine_id + "\n" +
+	    		"machine_updatekey : " + machine_updatekey + "\n" +
+				"appversion : " + sAppVersion + "\n" +
+				"processor : " + cpumodel + "\n" +
 	    		"cpunum : " + cpunum + "\n" +
-	    		"accounts : 1\n" + 
 	    		"totaldisk : " + disktotal + "\n" +
 	    		"totalram : " + MemTotal + "\n" +
-	    		"numusers : 1\n" +
 	    		"freedisk : " + freedisk + "\n" +
 	    		"freeram : " + MemFree + "\n" +
 	    		"totalswap : " + SwapTotal + "\n" +
@@ -284,10 +316,13 @@ public class getSysInfo extends Activity implements OnClickListener {
 	    		"load : " + loadavg + "\n" +
 	    		"cpufreq : " + cpufreq + "\n" +
 	    		"distribution : Android\n" +
-	    		"distribversion : " + androidversion + "\n" +
-	    		"online : online\n" +
-	    		"update_key : " + update_key;
-	    
+				"distribversion : " + androidversion + "\n" +
+				"class : " + deviceclass + "\n" +
+				"country : " + countryCode.toUpperCase() + "\n";
+
+		// Log.i(TAG, "getSysInfo: sending to LiCo...");
+		// Log.i(TAG, "getSysInfo: " + sysinformation);
+
 	    myText.setText(sysinformation);
 	    
 	    lView.addView(myText);

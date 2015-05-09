@@ -1,16 +1,5 @@
 package com.linuxcounter.lico_update_app;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import com.linuxcounter.lico_update_app.R;
-
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -28,6 +17,15 @@ import android.widget.EditText;
 import android.widget.RemoteViews.ActionException;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class ActivityEnterData extends Activity implements OnClickListener {
 
 	final String TAG = "MyDebugOutput";
@@ -42,7 +40,7 @@ public class ActivityEnterData extends Activity implements OnClickListener {
 		Button button = (Button) findViewById(R.id.button2);
 		button.setOnClickListener(this);
 
-		Log.v(TAG, "starting enterData...");
+		Log.i(TAG, "starting enterData...");
 
 		String filename = ".linuxcounter";
 		String filepath = Environment.getExternalStorageDirectory()
@@ -59,8 +57,6 @@ public class ActivityEnterData extends Activity implements OnClickListener {
 			myText1.setText(toks[0]);
 			EditText myText2 = (EditText) this.findViewById(R.id.editText2);
 			myText2.setText(toks[1]);
-			EditText myText3 = (EditText) this.findViewById(R.id.editText3);
-			myText3.setText(toks[2]);
 		} catch (Exception e1) {
 			// Do nothing
 		}
@@ -76,12 +72,10 @@ public class ActivityEnterData extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		EditText myText1 = (EditText) this.findViewById(R.id.editText1);
-		String counternum = myText1.getText().toString();
+		String machine_id = myText1.getText().toString();
 		EditText myText2 = (EditText) this.findViewById(R.id.editText2);
-		String machinenum = myText2.getText().toString();
-		EditText myText3 = (EditText) this.findViewById(R.id.editText3);
-		String updatekey = myText3.getText().toString();
-		SaveToFile(counternum + " " + machinenum + " " + updatekey + "\n");
+		String machine_updatekey = myText2.getText().toString();
+		SaveToFile(machine_id + " " + machine_updatekey + "\n");
 
 		ConnectivityManager manager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 		boolean is3g = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
@@ -89,13 +83,13 @@ public class ActivityEnterData extends Activity implements OnClickListener {
 		boolean isWifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
 				.isConnected();
 
-		Log.v(TAG, "Connection 3G: " + is3g + " | Connection wifi: " + isWifi);
+		Log.i(TAG, "Connection 3G: " + is3g + " | Connection wifi: " + isWifi);
 		if (!is3g && !isWifi) {
 			Toast.makeText(getApplicationContext(),
 					"Please make sure, your network connection is ON ",
 					Toast.LENGTH_LONG).show();
 		} else {
-			if (updatekey != "" && machinenum != "") {
+			if (machine_id != "" && machine_updatekey != "") {
 				connectToService();
 			}
 			startActivity(new Intent(this, getSysInfo.class));
@@ -145,11 +139,11 @@ public class ActivityEnterData extends Activity implements OnClickListener {
 	// Helper function for connecting to backgroundService.
 	private void connectToService() {
 		// Calling startService() first prevents it from being killed on
-		Log.v(TAG, "Starte Service für backgroundService.class...");
+		Log.i(TAG, "Starte Service fÃ¼r backgroundService.class...");
 		startService(new Intent(this, backgroundService.class));
 
 		// Now connect to it
-		Log.v(TAG, "Connecte zu backgroundService...");
+		Log.i(TAG, "Connecte zu backgroundService...");
 		serviceConnection = new backgroundServiceConnection();
 
 		boolean result = bindService(new Intent(this, backgroundService.class),

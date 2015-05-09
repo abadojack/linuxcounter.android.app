@@ -1,7 +1,5 @@
 package com.linuxcounter.lico_update_app;
 
-import com.linuxcounter.lico_update_app.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +20,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		Button button = (Button) findViewById(R.id.button2);
 		button.setOnClickListener(this);
 		
-		Log.v(TAG, "starting app...");
+		Log.i(TAG, "starting app...");
 	}
 
 	@Override
