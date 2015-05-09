@@ -103,6 +103,8 @@ public class backgroundService extends Service {
 
                 Log.v(TAG, "backgroundService: getting SysInfo...");
 
+
+
                 String toks[] = null;
                 String MemTotalt = null;
                 int MemTotal = 0;
@@ -121,7 +123,7 @@ public class backgroundService extends Service {
                 String androidversion;
                 androidversion = System.getProperty("http.agent").replaceAll(".*Android *([0-9.]+).*", "$1");
 
-                Log.i(TAG, "getSysInfo: androidversion: " + androidversion);
+                Log.i(TAG, "backgroundService: androidversion: " + androidversion);
 
                 System.getProperty("os.version");
 
@@ -134,7 +136,7 @@ public class backgroundService extends Service {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                Log.i(TAG, "getSysInfo: loadavg: " + loadavg);
+                Log.i(TAG, "backgroundService: loadavg: " + loadavg);
 
                 String cpuinfo = "";
                 try {
@@ -159,8 +161,8 @@ public class backgroundService extends Service {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
-                Log.i(TAG, "getSysInfo: cpumodel: " + cpumodel);
-                Log.i(TAG, "getSysInfo: cpunum: " + cpunum);
+                Log.i(TAG, "backgroundService: cpumodel: " + cpumodel);
+                Log.i(TAG, "backgroundService: cpunum: " + cpunum);
 
                 String flags = "";
                 try {
@@ -177,7 +179,7 @@ public class backgroundService extends Service {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
-                Log.i(TAG, "getSysInfo: flags: " + flags);
+                Log.i(TAG, "backgroundService: flags: " + flags);
 
                 String meminfo = "";
                 try {
@@ -208,10 +210,10 @@ public class backgroundService extends Service {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
-                Log.i(TAG, "getSysInfo: MemTotal: " + MemTotal);
-                Log.i(TAG, "getSysInfo: MemFree: " + MemFree);
-                Log.i(TAG, "getSysInfo: SwapTotal: " + SwapTotal);
-                Log.i(TAG, "getSysInfo: SwapFree: " + SwapFree);
+                Log.i(TAG, "backgroundService: MemTotal: " + MemTotal);
+                Log.i(TAG, "backgroundService: MemFree: " + MemFree);
+                Log.i(TAG, "backgroundService: SwapTotal: " + SwapTotal);
+                Log.i(TAG, "backgroundService: SwapFree: " + SwapFree);
 
                 long total = 0;
                 long avail = 0;
@@ -244,7 +246,7 @@ public class backgroundService extends Service {
                 } else {
                     disktotal = TotalMemory();
                 }
-                Log.i(TAG, "getSysInfo: disktotal: " + disktotal);
+                Log.i(TAG, "backgroundService: disktotal: " + disktotal);
 
                 long freedisk = 0;
                 if (extexists == true) {
@@ -252,7 +254,7 @@ public class backgroundService extends Service {
                 } else {
                     freedisk = FreeMemory();
                 }
-                Log.i(TAG, "getSysInfo: freedisk: " + freedisk);
+                Log.i(TAG, "backgroundService: freedisk: " + freedisk);
 
                 String hostname = "localhost";
                 String filename = ".linuxcounter";
@@ -283,13 +285,13 @@ public class backgroundService extends Service {
                         version = "unknown";
                     }
                 }
-                Log.i(TAG, "getSysInfo: machine: " + machine);
-                Log.i(TAG, "getSysInfo: version: " + version);
+                Log.i(TAG, "backgroundService: machine: " + machine);
+                Log.i(TAG, "backgroundService: version: " + version);
 
                 String uptime = Command("uptime").trim();
                 String[] toks2 = uptime.split(", ");
                 uptime = toks2[0].replace("up time: ", "").trim();
-                Log.i(TAG, "getSysInfo: uptime: " + uptime);
+                Log.i(TAG, "backgroundService: uptime: " + uptime);
 
                 String cpufreqt = "0";
                 try {
@@ -300,7 +302,7 @@ public class backgroundService extends Service {
                 }
                 Float cpufreq = Float.parseFloat(cpufreqt);
                 cpufreq = (cpufreq / 1024);
-                Log.i(TAG, "getSysInfo: cpufreq: " + cpufreq);
+                Log.i(TAG, "backgroundService: cpufreq: " + cpufreq);
 
 
                 String url = "http://api.linuxcounter.net/v1/machines/" + machine_id;
@@ -310,11 +312,11 @@ public class backgroundService extends Service {
                 if (tabletSize) {
                     deviceclass = "Tablet";
                 }
-                Log.i(TAG, "getSysInfo: deviceclass: " + deviceclass);
+                Log.i(TAG, "backgroundService: deviceclass: " + deviceclass);
 
                 TelephonyManager tm = (TelephonyManager) getSystemService(getApplicationContext().TELEPHONY_SERVICE);
                 String countryCode = tm.getNetworkCountryIso();
-                Log.i(TAG, "getSysInfo: countryCode: " + countryCode);
+                Log.i(TAG, "backgroundService: countryCode: " + countryCode);
 
                 aSendData = new String[]{
                         "url#" + url,
@@ -341,6 +343,8 @@ public class backgroundService extends Service {
                         "architecture#" + machine,
                         "class#" + deviceclass
                 };
+
+
 
                 postData(getApplicationContext(), aSendData);
 
@@ -369,9 +373,6 @@ public class backgroundService extends Service {
         String contentType;
         contentType = "application/x-www-form-urlencoded";
         Log.i(TAG, "backgroundService: start Volley Send POST()...");
-
-
-
 
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest sr = new StringRequest(Request.Method.PATCH, url, new Response.Listener<String>() {
@@ -406,9 +407,6 @@ public class backgroundService extends Service {
             }
         };
         queue.add(sr);
-
-
-
 
         return responseBody;
     }

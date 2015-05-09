@@ -2,11 +2,20 @@ package com.linuxcounter.lico_update_app;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,7 +29,9 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class sendSysInfo extends Activity {
 
@@ -35,60 +46,62 @@ public class sendSysInfo extends Activity {
 	    TextView myText = new TextView(this);
 	    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 	    StrictMode.setThreadPolicy(policy); 
-		String response = postData(getSysInfo.aSendData);
+		String response = postData(getApplicationContext(), getSysInfo.aSendData);
 	    myText.setText(response);
 	    lView.addView(myText);
 	}
 
 
 
-	public String postData(String postdata[]) {
-		Log.i(TAG, "sendSysInfo: start postData()...");
+	public String postData(Context context, final String postdata[]) {
+		Log.i(TAG, "backgroundService: start postData()...");
 		String responseBody = "";
 		String[] firstseparated = postdata[0].split("#");
 		String url = firstseparated[1];
 		String[] secseparated = postdata[1].split("#");
 		String machine_id = secseparated[1];
 		String[] thirdseparated = postdata[2].split("#");
-		String machine_updatekey = thirdseparated[1];
+		final String machine_updatekey = thirdseparated[1];
 
 		String data = null;
 		String contentType;
 		contentType = "application/x-www-form-urlencoded";
-		Log.i(TAG, "sendSysInfo: start DefaultHttpClient()...");
-		HttpClient httpClient = new DefaultHttpClient();
-		HttpPatch httpPatch= new HttpPatch(url);
-		httpPatch.setHeader("x-lico-machine-updatekey", machine_updatekey);
-		httpPatch.setHeader("Content-Type", contentType);
-		httpPatch.setHeader("Accept", "application/json");
-		httpPatch.setHeader("Accept-Charset", "utf-8");
+		Log.i(TAG, "backgroundService: start Volley Send POST()...");
 
-		try {
-			// Add your data
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-			for (int i = 0; i < postdata.length; i++) {
-				String[] separated = postdata[i].split("#");
-				Log.i(TAG, "sendSysInfo: POST data:  "+separated[0]+"="+separated[1]);
-				nameValuePairs.add(new BasicNameValuePair(separated[0], separated[1]));
+		RequestQueue queue = Volley.newRequestQueue(context);
+		StringRequest sr = new StringRequest(Request.Method.PATCH, url, new Response.Listener<String>() {
+			@Override
+			public void onResponse(String response) {
+				Log.i(TAG, "backgroundService: response: " + response);
 			}
-			httpPatch.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			// Execute HTTP PATCH Request
-			Log.i(TAG, "sendSysInfo: httpClient.execute(httpPatch)");
-			HttpResponse response = httpClient.execute(httpPatch);
-			int responseCode = response.getStatusLine().getStatusCode();
-			switch (responseCode) {
-				case 200:
-					HttpEntity entity = response.getEntity();
-					if (entity != null) {
-						responseBody = EntityUtils.toString(entity);
-					}
-					break;
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				Log.i(TAG, "backgroundService: error: " + error.toString());
 			}
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-		}
+		}){
+			@Override
+			protected Map<String,String> getParams(){
+				Map<String,String> params = new HashMap<String, String>();
+				for (int i = 0; i < postdata.length; i++) {
+					String[] separated = postdata[i].split("#");
+					Log.i(TAG, "backgroundService: PATCH data:  " + separated[0] + "=" + separated[1]);
+					params.put(separated[0], separated[1]);
+				}
+				return params;
+			}
+
+			@Override
+			public Map<String, String> getHeaders() throws AuthFailureError {
+				Map<String,String> params = new HashMap<String, String>();
+				params.put("Accept", "application/json");
+				params.put("Content-Type", "application/x-www-form-urlencoded");
+				params.put("x-lico-machine-updatekey", machine_updatekey);
+				return params;
+			}
+		};
+		queue.add(sr);
+
 		return responseBody;
 	}
 }
