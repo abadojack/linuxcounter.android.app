@@ -320,7 +320,7 @@ public class backgroundService extends Service {
                         "url#" + url,
                         "machine_id#" + machine_id,
                         "machine_updatekey#" + machine_updatekey,
-                        "appversion" + sAppVersion,
+                        "appversion#" + sAppVersion,
                         "hostname#" + hostname,
                         "cores#" + cpunum,
                         "flags#" + flags,

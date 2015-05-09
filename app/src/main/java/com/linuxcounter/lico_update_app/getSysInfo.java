@@ -268,13 +268,13 @@ public class getSysInfo extends Activity implements OnClickListener {
 
 		TelephonyManager tm = (TelephonyManager)getSystemService(getApplicationContext().TELEPHONY_SERVICE);
 		String countryCode = tm.getNetworkCountryIso();
-		Log.i(TAG, "getSysInfo: countryCode: "+countryCode);
+		Log.i(TAG, "getSysInfo: countryCode: "+countryCode.toUpperCase());
 
 		aSendData = new String[] {
 				"url#" + url,
 				"machine_id#" + machine_id,
 				"machine_updatekey#" + machine_updatekey,
-				"appversion" + sAppVersion,
+				"appversion#" + sAppVersion,
 				"hostname#" + hostname,
 				"cores#" + cpunum,
 				"flags#" + flags,
