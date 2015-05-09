@@ -8,7 +8,10 @@ import android.net.ConnectivityManager;
 import android.os.Binder;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
 import android.os.StatFs;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -35,17 +38,27 @@ import java.util.Map;
 public class backgroundService extends Service {
 
     public String sAppVersion = "0.0.1";
-
-    int sleepTime = 30; // Seconds
-
+    int sleepTime = 3600; // Seconds
     static String senddata = null;
     public String aSendData[] = {};
-
     final String TAG = "MyDebugOutput";
     @SuppressLint({"NewApi", "SdCardPath"})
-    // Variables
     protected Handler handler;
     protected Toast mToast;
+
+    private Looper mServiceLooper;
+    private ServiceHandler mServiceHandler;
+
+    // Handler that receives messages from the thread
+    private final class ServiceHandler extends Handler {
+        public ServiceHandler(Looper looper) {
+            super(looper);
+        }
+        @Override
+        public void handleMessage(Message msg) {
+            // do nothing here.
+        }
+    }
 
     // LocalBinder, mBinder and onBind() allow other Activities to bind to this
     // service.
@@ -59,14 +72,33 @@ public class backgroundService extends Service {
 
     @Override
     public void onCreate() {
-        super.onCreate();
         Log.i(TAG, "backgroundService: onCreate()");
+        // Start up the thread running the service.  Note that we create a
+        // separate thread because the service normally runs in the process's
+        // main thread, which we don't want to block.  We also make it
+        // background priority so CPU-intensive work will not disrupt our UI.
+        HandlerThread thread = new HandlerThread("ServiceStartArguments",
+                10);
+        thread.start();
+
+        // Get the HandlerThread's Looper and use it for our Handler
+        mServiceLooper = thread.getLooper();
+        mServiceHandler = new ServiceHandler(mServiceLooper);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "backgroundService: onStartCommand()");
-        return android.app.Service.START_STICKY;
+        Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
+
+        // For each start request, send a message to start a job and deliver the
+        // start ID so we know which request we're stopping when we finish the job
+        Message msg = mServiceHandler.obtainMessage();
+        msg.arg1 = startId;
+        mServiceHandler.sendMessage(msg);
+
+        // If we get killed, after returning from here, restart
+        return START_STICKY;
     }
 
     @Override
@@ -84,6 +116,7 @@ public class backgroundService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
         Log.w(TAG, "backgroundService: onDestroy()");
     }
 
