@@ -1,18 +1,15 @@
 package com.linuxcounter.lico_update_app;
 
 import android.annotation.SuppressLint;
-import android.app.Service;
-import android.content.Context;
+import android.app.IntentService;
 import android.content.Intent;
+import android.content.Context;
 import android.net.ConnectivityManager;
-import android.os.Binder;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.IBinder;
-import android.os.Looper;
-import android.os.Message;
+import android.os.ResultReceiver;
 import android.os.StatFs;
+import android.os.SystemClock;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -34,107 +31,58 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressLint("SdCardPath")
-public class backgroundService extends Service {
+/**
+ * An {@link IntentService} subclass for handling asynchronous task requests in
+ * a service on a separate handler thread.
+ */
+public class UpdateInBackgroundService extends IntentService {
+
+    final static String TAG = "MyDebugOutput";
 
     public String sAppVersion = "0.0.1";
-    int sleepTime = 3600; // Seconds
+    int sleepTime = 10; // Seconds
     static String senddata = null;
     public String aSendData[] = {};
-    final String TAG = "MyDebugOutput";
     @SuppressLint({"NewApi", "SdCardPath"})
     protected Handler handler;
     protected Toast mToast;
 
-    private Looper mServiceLooper;
-    private ServiceHandler mServiceHandler;
+    // TODO: Rename actions, choose action names that describe tasks that this
+    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
+    private static final String ACTION_UPDATE_MACHINE = "com.linuxcounter.lico_update_app.action.UpdateMachine";
 
-    // Handler that receives messages from the thread
-    private final class ServiceHandler extends Handler {
-        public ServiceHandler(Looper looper) {
-            super(looper);
-        }
-        @Override
-        public void handleMessage(Message msg) {
-            // do nothing here.
-        }
+    /**
+     * Starts this service to perform action Foo with the given parameters. If
+     * the service is already performing a task this action will be queued.
+     *
+     * @see IntentService
+     */
+    public static void startActionUpdateMachine(Context context) {
+        Log.d(TAG, "UpdateInBackgroundService: Step 1");
+        Intent intent = new Intent(context, UpdateInBackgroundService.class);
+        intent.setAction(ACTION_UPDATE_MACHINE);
+        context.startService(intent);
     }
 
-    // LocalBinder, mBinder and onBind() allow other Activities to bind to this
-    // service.
-    public class LocalBinder extends Binder {
-        public backgroundService getService() {
-            return backgroundService.this;
-        }
-    }
-
-    private final LocalBinder mBinder = new LocalBinder();
-
-    @Override
-    public void onCreate() {
-        Log.i(TAG, "backgroundService: onCreate()");
-        // Start up the thread running the service.  Note that we create a
-        // separate thread because the service normally runs in the process's
-        // main thread, which we don't want to block.  We also make it
-        // background priority so CPU-intensive work will not disrupt our UI.
-        HandlerThread thread = new HandlerThread("ServiceStartArguments",
-                10);
-        thread.start();
-
-        // Get the HandlerThread's Looper and use it for our Handler
-        mServiceLooper = thread.getLooper();
-        mServiceHandler = new ServiceHandler(mServiceLooper);
+    public UpdateInBackgroundService() {
+        super("UpdateInBackgroundService");
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i(TAG, "backgroundService: onStartCommand()");
-        Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
-
-        // For each start request, send a message to start a job and deliver the
-        // start ID so we know which request we're stopping when we finish the job
-        Message msg = mServiceHandler.obtainMessage();
-        msg.arg1 = startId;
-        mServiceHandler.sendMessage(msg);
-
-        // If we get killed, after returning from here, restart
-        return START_STICKY;
-    }
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        Log.d(TAG, "backgroundService: onBind()");
-        return mBinder;
-    }
-
-    @Override
-    public boolean onUnbind(Intent intent) {
-        Log.d(TAG, "backgroundService: onUnbind()");
-        return true;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
-        Log.w(TAG, "backgroundService: onDestroy()");
+    protected void onHandleIntent(Intent intent) {
+        handleActionUpdateMachine();
     }
 
     /**
-     * Example function.
-     *
-     * @return
+     * Handle action UpdateMachine in the provided background thread with the provided
+     * parameters.
      */
-    @SuppressLint("NewApi")
-    public void doTheBackgroundWork() {
-        if (!isWiFiEnabled()) {
-            Log.e(TAG, "backgroundService: No Internet connection available.");
-        } else {
-            Log.i(TAG, "backgroundService: doTheBackgroundWork()");
+    private void handleActionUpdateMachine() {
+        try {
+            for(;;) {
 
-            while (true) {
+                ////////////////////////////////////////////////////////////////////////////////
 
-                Log.v(TAG, "backgroundService: getting SysInfo...");
 
 
 
@@ -156,7 +104,7 @@ public class backgroundService extends Service {
                 String androidversion;
                 androidversion = System.getProperty("http.agent").replaceAll(".*Android *([0-9.]+).*", "$1");
 
-                Log.i(TAG, "backgroundService: androidversion: " + androidversion);
+                Log.d(TAG, "UpdateInBackgroundService: androidversion: " + androidversion);
 
                 System.getProperty("os.version");
 
@@ -169,7 +117,7 @@ public class backgroundService extends Service {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                Log.i(TAG, "backgroundService: loadavg: " + loadavg);
+                Log.d(TAG, "UpdateInBackgroundService: loadavg: " + loadavg);
 
                 String cpuinfo = "";
                 try {
@@ -194,8 +142,8 @@ public class backgroundService extends Service {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
-                Log.i(TAG, "backgroundService: cpumodel: " + cpumodel);
-                Log.i(TAG, "backgroundService: cpunum: " + cpunum);
+                Log.d(TAG, "UpdateInBackgroundService: cpumodel: " + cpumodel);
+                Log.d(TAG, "UpdateInBackgroundService: cpunum: " + cpunum);
 
                 String flags = "";
                 try {
@@ -212,7 +160,7 @@ public class backgroundService extends Service {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
-                Log.i(TAG, "backgroundService: flags: " + flags);
+                Log.d(TAG, "UpdateInBackgroundService: flags: " + flags);
 
                 String meminfo = "";
                 try {
@@ -243,10 +191,10 @@ public class backgroundService extends Service {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
-                Log.i(TAG, "backgroundService: MemTotal: " + MemTotal);
-                Log.i(TAG, "backgroundService: MemFree: " + MemFree);
-                Log.i(TAG, "backgroundService: SwapTotal: " + SwapTotal);
-                Log.i(TAG, "backgroundService: SwapFree: " + SwapFree);
+                Log.d(TAG, "UpdateInBackgroundService: MemTotal: " + MemTotal);
+                Log.d(TAG, "UpdateInBackgroundService: MemFree: " + MemFree);
+                Log.d(TAG, "UpdateInBackgroundService: SwapTotal: " + SwapTotal);
+                Log.d(TAG, "UpdateInBackgroundService: SwapFree: " + SwapFree);
 
                 long total = 0;
                 long avail = 0;
@@ -279,7 +227,7 @@ public class backgroundService extends Service {
                 } else {
                     disktotal = TotalMemory();
                 }
-                Log.i(TAG, "backgroundService: disktotal: " + disktotal);
+                Log.d(TAG, "UpdateInBackgroundService: disktotal: " + disktotal);
 
                 long freedisk = 0;
                 if (extexists == true) {
@@ -287,7 +235,7 @@ public class backgroundService extends Service {
                 } else {
                     freedisk = FreeMemory();
                 }
-                Log.i(TAG, "backgroundService: freedisk: " + freedisk);
+                Log.d(TAG, "UpdateInBackgroundService: freedisk: " + freedisk);
 
                 String hostname = "localhost";
                 String filename = ".linuxcounter";
@@ -318,13 +266,13 @@ public class backgroundService extends Service {
                         version = "unknown";
                     }
                 }
-                Log.i(TAG, "backgroundService: machine: " + machine);
-                Log.i(TAG, "backgroundService: version: " + version);
+                Log.d(TAG, "UpdateInBackgroundService: machine: " + machine);
+                Log.d(TAG, "UpdateInBackgroundService: version: " + version);
 
                 String uptime = Command("uptime").trim();
                 String[] toks2 = uptime.split(", ");
                 uptime = toks2[0].replace("up time: ", "").trim();
-                Log.i(TAG, "backgroundService: uptime: " + uptime);
+                Log.d(TAG, "UpdateInBackgroundService: uptime: " + uptime);
 
                 String cpufreqt = "0";
                 try {
@@ -335,7 +283,7 @@ public class backgroundService extends Service {
                 }
                 Float cpufreq = Float.parseFloat(cpufreqt);
                 cpufreq = (cpufreq / 1024);
-                Log.i(TAG, "backgroundService: cpufreq: " + cpufreq);
+                Log.d(TAG, "UpdateInBackgroundService: cpufreq: " + cpufreq);
 
 
                 String url = "http://api.linuxcounter.net/v1/machines/" + machine_id;
@@ -345,11 +293,11 @@ public class backgroundService extends Service {
                 if (tabletSize) {
                     deviceclass = "Tablet";
                 }
-                Log.i(TAG, "backgroundService: deviceclass: " + deviceclass);
+                Log.d(TAG, "UpdateInBackgroundService: deviceclass: " + deviceclass);
 
                 TelephonyManager tm = (TelephonyManager) getSystemService(getApplicationContext().TELEPHONY_SERVICE);
                 String countryCode = tm.getNetworkCountryIso();
-                Log.i(TAG, "backgroundService: countryCode: " + countryCode);
+                Log.d(TAG, "UpdateInBackgroundService: countryCode: " + countryCode);
 
                 aSendData = new String[]{
                         "url#" + url,
@@ -382,18 +330,33 @@ public class backgroundService extends Service {
                 postData(getApplicationContext(), aSendData);
 
                 try {
-                    Log.i(TAG, "backgroundService: Sleeping for " + sleepTime + " seconds...");
+                    Log.d(TAG, "UpdateInBackgroundService: Sleeping for " + sleepTime + " seconds...");
                     Thread.sleep((sleepTime * 1000));
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+
+
+
+
+
+                ////////////////////////////////////////////////////////////////////////////////
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Intent msgIntent = new Intent(this, UpdateInBackgroundService.class);
+        startService(msgIntent);
+    }
+
     public String postData(Context context, final String postdata[]) {
-        Log.i(TAG, "backgroundService: start postData()...");
+        Log.d(TAG, "UpdateInBackgroundService: start postData()...");
         String responseBody = "";
         String[] firstseparated = postdata[0].split("#");
         String url = firstseparated[1];
@@ -405,18 +368,18 @@ public class backgroundService extends Service {
         String data = null;
         String contentType;
         contentType = "application/x-www-form-urlencoded";
-        Log.i(TAG, "backgroundService: start Volley Send POST()...");
+        Log.d(TAG, "UpdateInBackgroundService: start Volley Send POST()...");
 
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest sr = new StringRequest(Request.Method.PATCH, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i(TAG, "backgroundService: response: " + response);
+                Log.d(TAG, "UpdateInBackgroundService: response: " + response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i(TAG, "backgroundService: error: " + error.toString());
+                Log.d(TAG, "UpdateInBackgroundService: error: " + error.toString());
             }
         }){
             @Override
@@ -424,7 +387,7 @@ public class backgroundService extends Service {
                 Map<String,String> params = new HashMap<String, String>();
                 for (int i = 0; i < postdata.length; i++) {
                     String[] separated = postdata[i].split("#");
-                    Log.i(TAG, "backgroundService: PATCH data:  " + separated[0] + "=" + separated[1]);
+                    Log.d(TAG, "UpdateInBackgroundService: PATCH data:  " + separated[0] + "=" + separated[1]);
                     params.put(separated[0], separated[1]);
                 }
                 return params;
@@ -526,7 +489,7 @@ public class backgroundService extends Service {
                 .isConnected();
         boolean isWifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
                 .isConnected();
-        Log.i(TAG, "backgroundService: Connection 3G: " + is3g
+        Log.d(TAG, "UpdateInBackgroundService: Connection 3G: " + is3g
                 + " | Connection wifi: " + isWifi);
         if (!is3g && !isWifi) {
             Toast.makeText(getApplicationContext(),

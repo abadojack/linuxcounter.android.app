@@ -30,9 +30,6 @@ public class ActivityEnterData extends Activity implements OnClickListener {
 
 	final String TAG = "MyDebugOutput";
 
-	protected backgroundService service;
-	protected backgroundServiceConnection serviceConnection;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -90,7 +87,8 @@ public class ActivityEnterData extends Activity implements OnClickListener {
 					Toast.LENGTH_LONG).show();
 		} else {
 			if (machine_id != "" && machine_updatekey != "") {
-				connectToService();
+				Intent msgIntent = new Intent(this, UpdateInBackgroundService.class);
+				startService(msgIntent);
 			}
 			startActivity(new Intent(this, getSysInfo.class));
 			finish();
@@ -134,50 +132,5 @@ public class ActivityEnterData extends Activity implements OnClickListener {
 				Log.e(TAG, "Could not write file " + e.getMessage());
 			}
 		}
-	}
-
-	// Helper function for connecting to backgroundService.
-	private void connectToService() {
-		// Calling startService() first prevents it from being killed on
-		Log.i(TAG, "Starte Service für backgroundService.class...");
-		startService(new Intent(this, backgroundService.class));
-
-		// Now connect to it
-		Log.i(TAG, "Connecte zu backgroundService...");
-		serviceConnection = new backgroundServiceConnection();
-
-		boolean result = bindService(new Intent(this, backgroundService.class),
-				serviceConnection, BIND_AUTO_CREATE);
-
-		if (!result) {
-			throw new RuntimeException("Unable to bind with service.");
-		}
-	}
-
-	protected class backgroundServiceConnection implements ServiceConnection {
-		@Override
-		public void onServiceConnected(ComponentName className, IBinder binder) {
-			Log.i(TAG, "onServiceConnected backgroundService");
-			service = ((backgroundService.LocalBinder) binder).getService();
-			callServiceFunction();
-		}
-
-		@Override
-		public void onServiceDisconnected(ComponentName className) {
-			Log.e(TAG, "onServiceDisconnected backgroundService");
-			service = null;
-		}
-
-	}
-
-	protected void callServiceFunction() throws ActionException {
-		Log.i(TAG, "Starte service.doTheBackgroundWork()...");
-		service.doTheBackgroundWork();
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		unbindService(serviceConnection);
 	}
 }

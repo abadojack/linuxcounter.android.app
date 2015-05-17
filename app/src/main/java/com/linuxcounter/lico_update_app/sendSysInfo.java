@@ -54,7 +54,7 @@ public class sendSysInfo extends Activity {
 
 
 	public String postData(Context context, final String postdata[]) {
-		Log.i(TAG, "backgroundService: start postData()...");
+		Log.i(TAG, "sendSysInfo: start postData()...");
 		String responseBody = "";
 		String[] firstseparated = postdata[0].split("#");
 		String url = firstseparated[1];
@@ -66,18 +66,18 @@ public class sendSysInfo extends Activity {
 		String data = null;
 		String contentType;
 		contentType = "application/x-www-form-urlencoded";
-		Log.i(TAG, "backgroundService: start Volley Send POST()...");
+		Log.i(TAG, "sendSysInfo: start Volley Send POST()...");
 
 		RequestQueue queue = Volley.newRequestQueue(context);
 		StringRequest sr = new StringRequest(Request.Method.PATCH, url, new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
-				Log.i(TAG, "backgroundService: response: " + response);
+				Log.i(TAG, "sendSysInfo: response: " + response);
 			}
 		}, new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				Log.i(TAG, "backgroundService: error: " + error.toString());
+				Log.i(TAG, "sendSysInfo: error: " + error.toString());
 			}
 		}){
 			@Override
@@ -85,7 +85,7 @@ public class sendSysInfo extends Activity {
 				Map<String,String> params = new HashMap<String, String>();
 				for (int i = 0; i < postdata.length; i++) {
 					String[] separated = postdata[i].split("#");
-					Log.i(TAG, "backgroundService: PATCH data:  " + separated[0] + "=" + separated[1]);
+					Log.i(TAG, "sendSysInfo: PATCH data:  " + separated[0] + "=" + separated[1]);
 					params.put(separated[0], separated[1]);
 				}
 				return params;
