@@ -86,10 +86,6 @@ public class ActivityEnterData extends Activity implements OnClickListener {
 					"Please make sure, your network connection is ON ",
 					Toast.LENGTH_LONG).show();
 		} else {
-			if (machine_id != "" && machine_updatekey != "") {
-				Intent msgIntent = new Intent(this, UpdateInBackgroundService.class);
-				startService(msgIntent);
-			}
 			startActivity(new Intent(this, getSysInfo.class));
 			finish();
 		}

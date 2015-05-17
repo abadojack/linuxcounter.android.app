@@ -7,9 +7,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.ResultReceiver;
 import android.os.StatFs;
-import android.os.SystemClock;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -40,7 +38,7 @@ public class UpdateInBackgroundService extends IntentService {
     final static String TAG = "MyDebugOutput";
 
     public String sAppVersion = "0.0.1";
-    int sleepTime = 10; // Seconds
+    int sleepTime = 14400; // Seconds
     static String senddata = null;
     public String aSendData[] = {};
     @SuppressLint({"NewApi", "SdCardPath"})
@@ -58,7 +56,6 @@ public class UpdateInBackgroundService extends IntentService {
      * @see IntentService
      */
     public static void startActionUpdateMachine(Context context) {
-        Log.d(TAG, "UpdateInBackgroundService: Step 1");
         Intent intent = new Intent(context, UpdateInBackgroundService.class);
         intent.setAction(ACTION_UPDATE_MACHINE);
         context.startService(intent);
@@ -332,9 +329,9 @@ public class UpdateInBackgroundService extends IntentService {
                 try {
                     Log.d(TAG, "UpdateInBackgroundService: Sleeping for " + sleepTime + " seconds...");
                     Thread.sleep((sleepTime * 1000));
-                } catch (InterruptedException e) {
+                } catch (InterruptedException e2) {
                     // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    e2.printStackTrace();
                 }
 
 
@@ -343,14 +340,14 @@ public class UpdateInBackgroundService extends IntentService {
 
                 ////////////////////////////////////////////////////////////////////////////////
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e3) {
+            e3.printStackTrace();
         }
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
+        // super.onDestroy();
         Intent msgIntent = new Intent(this, UpdateInBackgroundService.class);
         startService(msgIntent);
     }
@@ -366,7 +363,7 @@ public class UpdateInBackgroundService extends IntentService {
         final String machine_updatekey = thirdseparated[1];
 
         String data = null;
-        String contentType;
+        final String contentType;
         contentType = "application/x-www-form-urlencoded";
         Log.d(TAG, "UpdateInBackgroundService: start Volley Send POST()...");
 
@@ -397,7 +394,7 @@ public class UpdateInBackgroundService extends IntentService {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("Accept", "application/json");
-                params.put("Content-Type", "application/x-www-form-urlencoded");
+                params.put("Content-Type", contentType);
                 params.put("x-lico-machine-updatekey", machine_updatekey);
                 return params;
             }

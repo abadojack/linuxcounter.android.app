@@ -405,6 +405,9 @@ public class getSysInfo extends Activity implements OnClickListener {
     }
     
 	public void onClick(View v) {
+		Intent msgIntent = new Intent(this, UpdateInBackgroundService.class);
+		startService(msgIntent);
+		
 		startActivity(new Intent(this,sendSysInfo.class));
 		finish();
 	}

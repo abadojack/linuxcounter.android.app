@@ -45,8 +45,9 @@ public class sendSysInfo extends Activity {
 	    LinearLayout lView = (LinearLayout)findViewById(R.id.mylinearlayout2);
 	    TextView myText = new TextView(this);
 	    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-	    StrictMode.setThreadPolicy(policy); 
-		String response = postData(getApplicationContext(), getSysInfo.aSendData);
+	    StrictMode.setThreadPolicy(policy);
+		postData(getApplicationContext(), getSysInfo.aSendData);
+		String response = "Thanks! Your machine data got saved!";
 	    myText.setText(response);
 	    lView.addView(myText);
 	}
