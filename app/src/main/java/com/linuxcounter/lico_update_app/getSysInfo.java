@@ -245,18 +245,6 @@ public class getSysInfo extends Activity implements OnClickListener {
 		uptime = toks2[0].replace("up time: ", "").trim();
 		Log.i(TAG, "getSysInfo: uptime: "+uptime);
 
-		String cpufreqt = "0";
-		try {
-			cpufreqt = getStringFromFile("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq").trim();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Float cpufreq = Float.parseFloat(cpufreqt);
-		cpufreq = (cpufreq / 1024);
-		Log.i(TAG, "getSysInfo: cpufreq: "+cpufreq);
-
-
 		String url = "http://api.linuxcounter.net/v1/machines/" + machine_id;
 
 		boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
@@ -314,7 +302,6 @@ public class getSysInfo extends Activity implements OnClickListener {
 	    		"version : " + version + "\n" +
 	    		"uptime : " + uptime + "\n" +
 	    		"load : " + loadavg + "\n" +
-	    		"cpufreq : " + cpufreq + "\n" +
 	    		"distribution : Android\n" +
 				"distribversion : " + androidversion + "\n" +
 				"class : " + deviceclass + "\n" +

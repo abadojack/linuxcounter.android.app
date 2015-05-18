@@ -8,11 +8,11 @@ import android.content.Intent;
  * Created by alex on 17.05.15.
  */
 public class StartBackgroundServiceAtBootReceiver extends BroadcastReceiver {
-    @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)){
+        System.out.println("test 1");
+        if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
+            System.out.println("test 2");
             Intent i = new Intent(context, UpdateInBackgroundService.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startService(i);
         }
     }

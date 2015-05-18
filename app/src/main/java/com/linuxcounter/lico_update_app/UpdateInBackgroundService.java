@@ -67,6 +67,7 @@ public class UpdateInBackgroundService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        System.out.println("test 3");
         handleActionUpdateMachine();
     }
 
@@ -270,18 +271,6 @@ public class UpdateInBackgroundService extends IntentService {
                 String[] toks2 = uptime.split(", ");
                 uptime = toks2[0].replace("up time: ", "").trim();
                 Log.d(TAG, "UpdateInBackgroundService: uptime: " + uptime);
-
-                String cpufreqt = "0";
-                try {
-                    cpufreqt = getStringFromFile("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq").trim();
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                Float cpufreq = Float.parseFloat(cpufreqt);
-                cpufreq = (cpufreq / 1024);
-                Log.d(TAG, "UpdateInBackgroundService: cpufreq: " + cpufreq);
-
 
                 String url = "http://api.linuxcounter.net/v1/machines/" + machine_id;
 
