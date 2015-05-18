@@ -1,4 +1,4 @@
-package com.linuxcounter.lico_update_app;
+package com.linuxcounter.lico_update_003;
 
 import org.apache.http.client.methods.HttpPost;
 

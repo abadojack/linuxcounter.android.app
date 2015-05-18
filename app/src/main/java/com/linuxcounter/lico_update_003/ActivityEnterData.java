@@ -1,4 +1,4 @@
-package com.linuxcounter.lico_update_app;
+package com.linuxcounter.lico_update_003;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -41,7 +41,7 @@ public class ActivityEnterData extends Activity implements OnClickListener {
 
 		String filename = ".linuxcounter";
 		String filepath = Environment.getExternalStorageDirectory()
-				+ "/data/com.linuxcounter.lico_update_app";
+				+ "/data/com.linuxcounter.lico_update_003";
 		File readFile = new File(filepath, filename);
 		String load = "";
 		try {
@@ -114,7 +114,7 @@ public class ActivityEnterData extends Activity implements OnClickListener {
 		final String TAG = "MyDebugOutput";
 		String filename = ".linuxcounter";
 		String filepath = Environment.getExternalStorageDirectory()
-				+ "/data/com.linuxcounter.lico_update_app";
+				+ "/data/com.linuxcounter.lico_update_003";
 		File file = new File(filepath);
 		file.mkdirs();
 		File writeFile = new File(filepath, filename);

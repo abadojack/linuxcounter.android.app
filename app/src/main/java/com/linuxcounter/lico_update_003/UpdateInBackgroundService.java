@@ -1,13 +1,16 @@
-package com.linuxcounter.lico_update_app;
+package com.linuxcounter.lico_update_003;
 
 import android.annotation.SuppressLint;
 import android.app.IntentService;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.StatFs;
+import android.support.v4.app.NotificationCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -37,8 +40,9 @@ public class UpdateInBackgroundService extends IntentService {
 
     final static String TAG = "MyDebugOutput";
 
-    public String sAppVersion = "0.0.1";
-    int sleepTime = 14400; // Seconds
+    public String sAppVersion = "0.0.4";
+    // int sleepTime = 14400; // Seconds
+    int sleepTime = 60; // Seconds
     static String senddata = null;
     public String aSendData[] = {};
     @SuppressLint({"NewApi", "SdCardPath"})
@@ -47,7 +51,7 @@ public class UpdateInBackgroundService extends IntentService {
 
     // TODO: Rename actions, choose action names that describe tasks that this
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private static final String ACTION_UPDATE_MACHINE = "com.linuxcounter.lico_update_app.action.UpdateMachine";
+    private static final String ACTION_UPDATE_MACHINE = "com.linuxcounter.lico_update_003.action.UpdateMachine";
 
     /**
      * Starts this service to perform action Foo with the given parameters. If
@@ -67,6 +71,25 @@ public class UpdateInBackgroundService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Context ctx = getApplicationContext();
+        PendingIntent contentIntent = PendingIntent.getActivity(ctx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.Builder b = new NotificationCompat.Builder(ctx);
+
+        b.setAutoCancel(true)
+                // .setDefaults(Notification.DEFAULT_ALL)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setTicker("The Linux Counter Project")
+                .setContentTitle("The Linux Counter Project")
+                .setContentText("Status notification")
+                .setContentIntent(contentIntent)
+                .setSound(null)
+                .setAutoCancel(false)
+                .setOngoing(true);
+
+        NotificationManager notificationManager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, b.build());
+
         handleActionUpdateMachine();
     }
 
@@ -236,7 +259,7 @@ public class UpdateInBackgroundService extends IntentService {
 
                 String hostname = "localhost";
                 String filename = ".linuxcounter";
-                String filepath = Environment.getExternalStorageDirectory() + "/data/com.linuxcounter.lico_update_app";
+                String filepath = Environment.getExternalStorageDirectory() + "/data/com.linuxcounter.lico_update_003";
                 File readFile = new File(filepath, filename);
                 String machine_id = "";
                 String machine_updatekey = "";
@@ -335,7 +358,7 @@ public class UpdateInBackgroundService extends IntentService {
 
     @Override
     public void onDestroy() {
-        // super.onDestroy();
+        super.onDestroy();
         Intent msgIntent = new Intent(this, UpdateInBackgroundService.class);
         startService(msgIntent);
     }

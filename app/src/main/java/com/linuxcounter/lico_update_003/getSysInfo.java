@@ -1,4 +1,4 @@
-package com.linuxcounter.lico_update_app;
+package com.linuxcounter.lico_update_003;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -27,7 +27,7 @@ import java.io.InputStreamReader;
 
 public class getSysInfo extends Activity implements OnClickListener {
 
-	public String sAppVersion = "0.0.1";
+	public String sAppVersion = "0.0.5";
 	
 	static String aSendData[] = {};
 
@@ -210,7 +210,7 @@ public class getSysInfo extends Activity implements OnClickListener {
 
 		String hostname = "localhost";
 		String filename = ".linuxcounter";
-		String filepath = Environment.getExternalStorageDirectory()+ "/data/com.linuxcounter.lico_update_app";
+		String filepath = Environment.getExternalStorageDirectory()+ "/data/com.linuxcounter.lico_update_003";
 		File readFile = new File(filepath, filename);
         String machine_id = "";
         String machine_updatekey = "";
