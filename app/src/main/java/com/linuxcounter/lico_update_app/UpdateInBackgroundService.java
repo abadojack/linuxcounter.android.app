@@ -67,7 +67,6 @@ public class UpdateInBackgroundService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        System.out.println("test 3");
         handleActionUpdateMachine();
     }
 

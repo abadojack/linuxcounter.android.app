@@ -9,9 +9,7 @@ import android.content.Intent;
  */
 public class StartBackgroundServiceAtBootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
-        System.out.println("test 1");
         if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
-            System.out.println("test 2");
             Intent i = new Intent(context, UpdateInBackgroundService.class);
             context.startService(i);
         }
