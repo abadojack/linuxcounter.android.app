@@ -42,7 +42,7 @@ public class UpdateInBackgroundService extends IntentService {
 
     public String sAppVersion = "0.0.5";
     // int sleepTime = 14400; // Seconds
-    int sleepTime = 60; // Seconds
+    int sleepTime = 14400; // Seconds
     static String senddata = null;
     public String aSendData[] = {};
     @SuppressLint({"NewApi", "SdCardPath"})
