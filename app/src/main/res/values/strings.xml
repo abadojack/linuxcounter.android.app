@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">lico-update</string>
+    <string name="app_name">Linux Counter Updater</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="hello1">Hello Linux User!</string>
-    <string name="start1">This app is the official <i>lico-update</i> app of <b>The Linux Counter Project</b>. It will read all needed, system related information from your smartphone and send this information to <b>The Linux Counter Project</b> (https://www.linuxcounter.net). If you do not provide a machine number and an update key for a machine, then it will create a new machine under your LiCo account.</string>
+    <string name="start1">This app is the official <i>Linux Counter Updater</i> app of <b>The Linux Counter Project</b>. It will read all needed, system related information from your smartphone and send this information to <b>The Linux Counter Project</b> (https://www.linuxcounter.net). If you do not provide a machine number and an update key for a machine, then it will create a new machine under your LiCo account.</string>
     <string name="start2">Please continue by touching the button below. You then have to enter (or check) your Linux Counter data...</string>
     <string name="button1">Save your Machine-ID\nand Machine UpdateKey\nand get system information</string>
     <string name="button2">Try to send information...</string>
@@ -15,7 +15,7 @@
     <string name="enter_updatekey">If you want to update an existing machine and you have entered a machinenumber above, then also enter your update key for this machine here. You can find the update key, when editing the machine on https://www.linuxcounter.net.</string>
     <string name="showdata">The following data will be sent to the Linux Counter if you decide to continue. Please check the data carefully and then confirm sending this data by touching the button below (you may need to scroll).</string>
     <string name="send_data">Send data...</string>
-    <string name="sending">Sending...</string>
+    <string name="sending">Data sent!</string>
     <string name="local_service_started">lico-update started!</string>
 
 </resources>

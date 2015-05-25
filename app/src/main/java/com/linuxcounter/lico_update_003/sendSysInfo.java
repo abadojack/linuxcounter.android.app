@@ -47,7 +47,7 @@ public class sendSysInfo extends Activity {
 	    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 	    StrictMode.setThreadPolicy(policy);
 		postData(getApplicationContext(), getSysInfo.aSendData);
-		String response = "Thanks! Your machine data got saved!";
+		String response = "Thanks! Your machine data got saved!\n\nYou now may close this app or you may put it into the background to do automatic updates every 8 hours.";
 	    myText.setText(response);
 	    lView.addView(myText);
 	}
@@ -70,7 +70,7 @@ public class sendSysInfo extends Activity {
 		Log.i(TAG, "sendSysInfo: start Volley Send POST()...");
 
 		RequestQueue queue = Volley.newRequestQueue(context);
-		StringRequest sr = new StringRequest(Request.Method.PATCH, url, new Response.Listener<String>() {
+		StringRequest sr = new StringRequest(Request.Method.PUT, url, new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
 				Log.i(TAG, "sendSysInfo: response: " + response);

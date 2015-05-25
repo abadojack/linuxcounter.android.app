@@ -27,7 +27,7 @@ import java.io.InputStreamReader;
 
 public class getSysInfo extends Activity implements OnClickListener {
 
-	public String sAppVersion = "0.0.5";
+	public String sAppVersion = "0.0.6";
 	
 	static String aSendData[] = {};
 
@@ -118,14 +118,17 @@ public class getSysInfo extends Activity implements OnClickListener {
 
 	    String flags = "";
 		try {
-			flags = getStringFromFile("/proc/cpuinfo").replace("\r", "").replace("\n\n", "\n");
-			toks = flags.split("\n");
+			String flagst = getStringFromFile("/proc/cpuinfo").replace("\r", "").replace("\n\n", "\n");
+			toks = flagst.split("\n");
 			for (int a = 0; a<toks.length; a++) {
 			   String k = (String) toks[a];
 			   String[] toks2 = k.split(":");
-			   if (toks2[0].trim().matches("^Features.*") && toks2[1].trim().matches("^[a-zA-Z]+.*")) {
-				   flags = toks2[1].trim();
-			   }
+				if (toks2[0].trim().matches("^Features.*") && toks2[1].trim().matches("^[a-zA-Z]+.*")) {
+					flags = toks2[1].trim();
+				}
+				if (toks2[0].trim().matches("^flags.*") && toks2[1].trim().matches("^[a-zA-Z]+.*")) {
+					flags = toks2[1].trim();
+				}
 			}
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block

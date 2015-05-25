@@ -29,6 +29,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,9 +42,9 @@ public class UpdateInBackgroundService extends IntentService {
 
     final static String TAG = "MyDebugOutput";
 
-    public String sAppVersion = "0.0.5";
-    // int sleepTime = 14400; // Seconds
-    int sleepTime = 14400; // Seconds
+    public String sAppVersion = "0.0.6";
+    // int sleepTime = 30; // Seconds
+    int sleepTime = 28800; // Seconds
     static String senddata = null;
     public String aSendData[] = {};
     @SuppressLint({"NewApi", "SdCardPath"})
@@ -71,33 +73,14 @@ public class UpdateInBackgroundService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Context ctx = getApplicationContext();
-        PendingIntent contentIntent = PendingIntent.getActivity(ctx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        NotificationCompat.Builder b = new NotificationCompat.Builder(ctx);
-
-        b.setAutoCancel(true)
-                // .setDefaults(Notification.DEFAULT_ALL)
-                .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setTicker("The Linux Counter Project")
-                .setContentTitle("The Linux Counter Project")
-                .setContentText("Status notification")
-                .setContentIntent(contentIntent)
-                .setSound(null)
-                .setAutoCancel(false)
-                .setOngoing(true);
-
-        NotificationManager notificationManager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(1, b.build());
-
-        handleActionUpdateMachine();
+        handleActionUpdateMachine(intent);
     }
 
     /**
      * Handle action UpdateMachine in the provided background thread with the provided
      * parameters.
      */
-    private void handleActionUpdateMachine() {
+    private void handleActionUpdateMachine(Intent intent) {
         try {
             for(;;) {
 
@@ -167,12 +150,15 @@ public class UpdateInBackgroundService extends IntentService {
 
                 String flags = "";
                 try {
-                    flags = getStringFromFile("/proc/cpuinfo").replace("\r", "").replace("\n\n", "\n");
-                    toks = flags.split("\n");
-                    for (int a = 0; a < toks.length; a++) {
+                    String flagst = getStringFromFile("/proc/cpuinfo").replace("\r", "").replace("\n\n", "\n");
+                    toks = flagst.split("\n");
+                    for (int a = 0; a<toks.length; a++) {
                         String k = (String) toks[a];
                         String[] toks2 = k.split(":");
                         if (toks2[0].trim().matches("^Features.*") && toks2[1].trim().matches("^[a-zA-Z]+.*")) {
+                            flags = toks2[1].trim();
+                        }
+                        if (toks2[0].trim().matches("^flags.*") && toks2[1].trim().matches("^[a-zA-Z]+.*")) {
                             flags = toks2[1].trim();
                         }
                     }
@@ -333,9 +319,25 @@ public class UpdateInBackgroundService extends IntentService {
                         "class#" + deviceclass
                 };
 
-
-
                 postData(getApplicationContext(), aSendData);
+
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+                Context ctx = getApplicationContext();
+                PendingIntent contentIntent = PendingIntent.getActivity(ctx, 0, new Intent(this, MainActivity.class), 0);
+                NotificationCompat.Builder b = new NotificationCompat.Builder(ctx);
+
+                b.setAutoCancel(true)
+                        .setWhen(System.currentTimeMillis())
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setTicker("The Linux Counter Project")
+                        .setContentTitle("The Linux Counter Project")
+                        .setContentText("Last update: " + currentDateTimeString)
+                        .setContentIntent(contentIntent)
+                        .setSound(null);
+
+                NotificationManager notificationManager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(1, b.build());
 
                 try {
                     Log.d(TAG, "UpdateInBackgroundService: Sleeping for " + sleepTime + " seconds...");
@@ -344,10 +346,6 @@ public class UpdateInBackgroundService extends IntentService {
                     // TODO Auto-generated catch block
                     e2.printStackTrace();
                 }
-
-
-
-
 
                 ////////////////////////////////////////////////////////////////////////////////
             }
@@ -379,7 +377,7 @@ public class UpdateInBackgroundService extends IntentService {
         Log.d(TAG, "UpdateInBackgroundService: start Volley Send POST()...");
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        StringRequest sr = new StringRequest(Request.Method.PATCH, url, new Response.Listener<String>() {
+        StringRequest sr = new StringRequest(Request.Method.PUT, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "UpdateInBackgroundService: response: " + response);
