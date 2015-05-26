@@ -72,6 +72,7 @@ public class ActivityEnterData extends Activity implements OnClickListener {
 		String machine_id = myText1.getText().toString();
 		EditText myText2 = (EditText) this.findViewById(R.id.editText2);
 		String machine_updatekey = myText2.getText().toString();
+
 		SaveToFile(machine_id + " " + machine_updatekey + "\n");
 
 		ConnectivityManager manager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);

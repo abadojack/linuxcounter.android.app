@@ -27,7 +27,7 @@ import java.io.InputStreamReader;
 
 public class getSysInfo extends Activity implements OnClickListener {
 
-	public String sAppVersion = "0.0.6";
+	public String sAppVersion = "0.0.7";
 	
 	static String aSendData[] = {};
 
@@ -57,9 +57,8 @@ public class getSysInfo extends Activity implements OnClickListener {
 		Button button = (Button) findViewById(R.id.button1);
 		button.setOnClickListener(this);
 		
-	    LinearLayout lView = (LinearLayout)findViewById(R.id.mylinearlayout);
-	    TextView myText = new TextView(this);
-	    
+	    TextView myText = (TextView)findViewById(R.id.textView5);
+
 	    System.getProperty("user.region");
 
 	    String androidversion;
@@ -315,7 +314,6 @@ public class getSysInfo extends Activity implements OnClickListener {
 
 	    myText.setText(sysinformation);
 	    
-	    lView.addView(myText);
 	}
 	
     public static String convertStreamToString(InputStream is) throws Exception {

@@ -42,14 +42,12 @@ public class sendSysInfo extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.send_sys_info);
-	    LinearLayout lView = (LinearLayout)findViewById(R.id.mylinearlayout2);
-	    TextView myText = new TextView(this);
+	    TextView myText = (TextView)findViewById(R.id.textView6);
 	    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 	    StrictMode.setThreadPolicy(policy);
 		postData(getApplicationContext(), getSysInfo.aSendData);
 		String response = "Thanks! Your machine data got saved!\n\nYou now may close this app or you may put it into the background to do automatic updates every 8 hours.";
 	    myText.setText(response);
-	    lView.addView(myText);
 	}
 
 

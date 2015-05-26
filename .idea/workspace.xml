@@ -2,24 +2,71 @@
 <project version="4">
   <component name="AndroidLayouts">
     <shared>
-      <config />
+      <config>
+        <devices>
+          <device id="Samsung Galaxy S4 1" />
+          <device id="Nexus 7 2013" />
+          <device id="Nexus 6" />
+          <device id="Nexus 5" />
+          <device id="Nexus 4" />
+          <device id="Nexus 7" />
+          <device id="Nexus 10" />
+        </devices>
+        <target>android-22</target>
+      </config>
     </shared>
+    <layouts>
+      <layout url="file:///daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_enterdata.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file:///daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_main.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file:///daten/srv/linuxcounter.android.app/app/src/main/res/layout/get_sys_info.xml">
+        <config>
+          <theme>@android:style/Theme.Light.NoTitleBar.Fullscreen</theme>
+        </config>
+      </layout>
+      <layout url="file:///daten/srv/linuxcounter.android.app/app/src/main/res/layout/send_sys_info.xml">
+        <config>
+          <theme>@android:style/Theme.Light.NoTitleBar.Fullscreen</theme>
+        </config>
+      </layout>
+    </layouts>
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cd27c28-6c4d-4f66-b8fd-1f1522eb8b4d" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="/daten/srv/linuxcounter.android.app/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="NEW" beforePath="" afterPath="/daten/srv/linuxcounter.android.app/.idea/inspectionProfiles/profiles_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="/daten/srv/linuxcounter.android.app/volley" afterPath="/daten/srv/linuxcounter.android.app/volley" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/volley" afterPath="$PROJECT_DIR$/volley" />
+      <change type="MODIFICATION" beforePath="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/ActivityEnterData.java" afterPath="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/ActivityEnterData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/linuxcounter/lico_update_003/ActivityEnterData.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/linuxcounter/lico_update_003/ActivityEnterData.java" />
       <change type="MODIFICATION" beforePath="/daten/srv/linuxcounter.android.app/app/src/main/AndroidManifest.xml" afterPath="/daten/srv/linuxcounter.android.app/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/UpdateInBackgroundService.java" afterPath="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/UpdateInBackgroundService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/linuxcounter/lico_update_003/UpdateInBackgroundService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/linuxcounter/lico_update_003/UpdateInBackgroundService.java" />
+      <change type="MODIFICATION" beforePath="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_enterdata.xml" afterPath="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_enterdata.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_enterdata.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_enterdata.xml" />
+      <change type="MODIFICATION" beforePath="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_main.xml" afterPath="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
       <change type="MODIFICATION" beforePath="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/getSysInfo.java" afterPath="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/getSysInfo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/linuxcounter/lico_update_003/getSysInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/linuxcounter/lico_update_003/getSysInfo.java" />
+      <change type="MODIFICATION" beforePath="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/get_sys_info.xml" afterPath="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/get_sys_info.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/get_sys_info.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/get_sys_info.xml" />
       <change type="MODIFICATION" beforePath="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/sendSysInfo.java" afterPath="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/sendSysInfo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/linuxcounter/lico_update_003/sendSysInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/linuxcounter/lico_update_003/sendSysInfo.java" />
+      <change type="MODIFICATION" beforePath="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/send_sys_info.xml" afterPath="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/send_sys_info.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/send_sys_info.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/send_sys_info.xml" />
       <change type="MODIFICATION" beforePath="/daten/srv/linuxcounter.android.app/app/src/main/res/values/strings.xml" afterPath="/daten/srv/linuxcounter.android.app/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="/daten/srv/linuxcounter.android.app/.idea/workspace.xml" afterPath="/daten/srv/linuxcounter.android.app/.idea/workspace.xml" />
@@ -63,26 +110,13 @@
     <favorites_list name="linuxcounter.android.app" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="UpdateInBackgroundService.java" pinned="false" current-in-tab="true">
-        <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/UpdateInBackgroundService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29661018">
-              <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
-              <folding>
-                <element signature="e#2475#2476#0" expanded="true" />
-                <element signature="e#2524#2525#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="layoutResourceFile_vertical" />
       </list>
     </option>
   </component>
@@ -2028,7 +2062,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_enterdata.xml" />
         <option value="/daten/srv/linuxcounter.android.app/app/src/main/res/values-sw600dp/dimens.xml" />
         <option value="/daten/srv/linuxcounter.android.app/app/src/main/res/values-sw720dp-land/dimens.xml" />
         <option value="/daten/srv/linuxcounter.android.app/app/src/main/res/values/dimens.xml" />
@@ -2039,19 +2072,23 @@
         <option value="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_app/backgroundService.java" />
         <option value="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_app/ActivityEnterData.java" />
         <option value="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_app/sendSysInfo.java" />
-        <option value="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/get_sys_info.xml" />
-        <option value="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_main.xml" />
         <option value="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_app/StartBackgroundServiceAtBootReceiver.java" />
         <option value="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_app/UpdateInBackgroundService.java" />
         <option value="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_app/getSysInfo.java" />
         <option value="/daten/srv/linuxcounter.android.app/app/build/generated/source/buildConfig/androidTest/debug/com/linuxcounter/lico_update_app/test/BuildConfig.java" />
         <option value="/daten/srv/linuxcounter.android.app/app/build/generated/source/buildConfig/debug/com/linuxcounter/lico_update_app/BuildConfig.java" />
         <option value="/daten/srv/linuxcounter.android.app/app/build.gradle" />
+        <option value="/daten/srv/linuxcounter.android.app/app/src/main/res/layout-finger/activity_main_new.xml" />
+        <option value="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/UpdateInBackgroundService.java" />
         <option value="/daten/srv/linuxcounter.android.app/app/src/main/AndroidManifest.xml" />
         <option value="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/getSysInfo.java" />
         <option value="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/sendSysInfo.java" />
+        <option value="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/get_sys_info.xml" />
+        <option value="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_main.xml" />
+        <option value="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/send_sys_info.xml" />
+        <option value="/daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_enterdata.xml" />
         <option value="/daten/srv/linuxcounter.android.app/app/src/main/res/values/strings.xml" />
-        <option value="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/UpdateInBackgroundService.java" />
+        <option value="/daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/ActivityEnterData.java" />
       </list>
     </option>
   </component>
@@ -2071,7 +2108,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
@@ -2087,7 +2124,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2176,23 +2213,24 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="recentsLimit" value="5" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Font" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.WIDTH" value="530" />
+    <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.WIDTH" value="341" />
     <property name="FullScreen" value="false" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="9a138af0" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Samsung_Galaxy_S4_API_17" />
     <property name="ExportApk.ApkPath" value="/daten/srv/linuxcounter.android.app/app" />
     <property name="ExportApk.Flavors" value="" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="last_opened_file_path" value="$USER_HOME$/Cloud/PRIVAT/android-apk.keystore" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.WIDTH" value="579" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
@@ -2406,11 +2444,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="1" width="1911" height="1078" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21814255" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40042943" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.150108" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995194" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2880259" sideWeight="0.5040043" order="7" side_tool="true" content_ui="tabs" />
@@ -2418,19 +2457,18 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3462783" sideWeight="0.50186867" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4325782" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16954644" sideWeight="0.49599573" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.537797" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23110151" sideWeight="0.49599573" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995194" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24986653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22061191" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5475162" sideWeight="0.49813133" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25281805" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3088553" sideWeight="0.49813133" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3758676" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6062567" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2458,17 +2496,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/UpdateInBackgroundService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#2475#2476#0" expanded="true" />
-            <element signature="e#2524#2525#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/getSysInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2481,9 +2508,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2491,9 +2515,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="37" column="39" selection-start-line="37" selection-start-column="39" selection-end-line="37" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2501,9 +2523,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2511,10 +2530,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#2475#2476#0" expanded="true" />
-            <element signature="e#2524#2525#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2582,13 +2598,13 @@
       </provider>
     </entry>
     <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_enterdata.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/res/values/strings.xml">
@@ -2631,16 +2647,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_enterdata.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/res/values-sw600dp/dimens.xml">
@@ -2702,30 +2708,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/res/layout/get_sys_info.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4503464">
-          <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
-          <folding>
-            <element signature="e#812#830#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/Android/Sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0-sources.jar!/android/support/v4/app/NotificationCompat.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3322933">
@@ -2737,13 +2719,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.6593407">
           <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/ActivityEnterData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17266187">
-          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -2789,20 +2764,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/AndroidManifest.xml">
+    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/sendSysInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17266187">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.23493044">
+          <caret line="46" column="43" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/MainActivity.java">
+    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2810,55 +2784,91 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/res/layout/send_sys_info.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/sendSysInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3013393">
-          <caret line="49" column="170" selection-start-line="49" selection-start-column="170" selection-end-line="49" selection-end-column="170" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25210086">
-          <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/getSysInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25706214">
-          <caret line="240" column="13" selection-start-line="240" selection-start-column="13" selection-end-line="240" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/UpdateInBackgroundService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29661018">
-          <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
-          <folding>
-            <element signature="e#2475#2476#0" expanded="true" />
-            <element signature="e#2524#2525#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.109970674">
+          <caret line="48" column="35" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3739003">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/res/layout/get_sys_info.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="13" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/res/layout/send_sys_info.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/getSysInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42075735">
+          <caret line="217" column="0" selection-start-line="216" selection-start-column="0" selection-end-line="217" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/res/layout/activity_enterdata.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/java/com/linuxcounter/lico_update_003/ActivityEnterData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.3115578">
+          <caret line="75" column="19" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///daten/srv/linuxcounter.android.app/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.72386056">
+          <caret line="18" column="289" selection-start-line="18" selection-start-column="289" selection-end-line="18" selection-end-column="289" />
+          <folding />
         </state>
       </provider>
     </entry>
