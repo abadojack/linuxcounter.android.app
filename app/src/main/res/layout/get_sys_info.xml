@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -41,7 +42,9 @@
 				android:id="@+id/textView5"
 				android:layout_gravity="center_horizontal"
 				android:textColor="#ff000000"
-				android:padding="7dp" />
+				android:padding="7dp"
+				tools:background="@android:color/holo_green_light"
+				tools:text="List system information here ..."	/>
 
 			<Button
 	            android:id="@+id/button1"
