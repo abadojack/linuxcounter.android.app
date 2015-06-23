@@ -57,7 +57,6 @@ public class getSysInfo extends Activity implements OnClickListener {
 		Button button = (Button) findViewById(R.id.button1);
 		button.setOnClickListener(this);
 		
-	    TextView myText = (TextView)findViewById(R.id.textView5);
 
 	    System.getProperty("user.region");
 
@@ -312,7 +311,8 @@ public class getSysInfo extends Activity implements OnClickListener {
 		// Log.i(TAG, "getSysInfo: sending to LiCo...");
 		// Log.i(TAG, "getSysInfo: " + sysinformation);
 
-	    myText.setText(sysinformation);
+	    TextView systemInformationTextView = (TextView)findViewById(R.id.system_information);
+	    systemInformationTextView.setText(sysinformation);
 	    
 	}
 	

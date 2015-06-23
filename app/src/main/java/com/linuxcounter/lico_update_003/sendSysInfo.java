@@ -42,12 +42,12 @@ public class sendSysInfo extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.send_sys_info);
-	    TextView myText = (TextView)findViewById(R.id.textView6);
+	    TextView sentDataResponseTextView = (TextView)findViewById(R.id.sent_data_response);
 	    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 	    StrictMode.setThreadPolicy(policy);
 		postData(getApplicationContext(), getSysInfo.aSendData);
 	    	String response = getString(R.string.sent_data_successfully);
-	    myText.setText(response);
+	    sentDataResponseTextView.setText(response);
 	}
 
 
