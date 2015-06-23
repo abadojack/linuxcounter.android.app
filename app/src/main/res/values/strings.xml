@@ -15,6 +15,11 @@
     <string name="showdata">The following data will be sent to the Linux Counter if you decide to continue. Please check the data carefully and then confirm sending this data by touching the button below (you may need to scroll).</string>
     <string name="send_data">Send data...</string>
     <string name="sending">Data sent!</string>
+    <string name="sent_data_successfully">
+        Thanks! Your machine data got saved!\n\nYou now may close
+        this app or you may put it into the background to do
+        automatic updates every 8 hours.
+    </string>
     <string name="local_service_started">lico-update started!</string>
     <string name="apikeytext">First you have to register an account for The Linux Counter Project on https://www.linuxcounter.net. Then you need to log into your account and go to "Account" -> "Create new machine". You don\'t need to enter anything in the fields there, just only hit "Save". After that you see the machine_id and the machine_updatekey in your profile at the bottom in the list of your machines.</string>
     <string name="found_a_bug">

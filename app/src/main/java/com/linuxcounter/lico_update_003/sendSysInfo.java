@@ -46,7 +46,7 @@ public class sendSysInfo extends Activity {
 	    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 	    StrictMode.setThreadPolicy(policy);
 		postData(getApplicationContext(), getSysInfo.aSendData);
-		String response = "Thanks! Your machine data got saved!\n\nYou now may close this app or you may put it into the background to do automatic updates every 8 hours.";
+	    	String response = getString(R.string.sent_data_successfully);
 	    myText.setText(response);
 	}
 
