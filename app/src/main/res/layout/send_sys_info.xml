@@ -39,7 +39,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="You have found a bug or you have a problem with this APP? Please leave us a bug report on github!\nhttps://github.com/alexloehner/linuxcounter.android.app"
+        android:text="@string/found_a_bug"
         android:id="@+id/textView4"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
