@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Environment;
 import android.os.Handler;
@@ -82,11 +82,9 @@ public class UpdateInBackgroundService extends IntentService {
      */
     private void handleActionUpdateMachine(Intent intent) {
         try {
-            for(;;) {
+            for (; ; ) {
 
                 ////////////////////////////////////////////////////////////////////////////////
-
-
 
 
                 String toks[] = null;
@@ -152,7 +150,7 @@ public class UpdateInBackgroundService extends IntentService {
                 try {
                     String flagst = getStringFromFile("/proc/cpuinfo").replace("\r", "").replace("\n\n", "\n");
                     toks = flagst.split("\n");
-                    for (int a = 0; a<toks.length; a++) {
+                    for (int a = 0; a < toks.length; a++) {
                         String k = (String) toks[a];
                         String[] toks2 = k.split(":");
                         if (toks2[0].trim().matches("^Features.*") && toks2[1].trim().matches("^[a-zA-Z]+.*")) {
@@ -387,10 +385,10 @@ public class UpdateInBackgroundService extends IntentService {
             public void onErrorResponse(VolleyError error) {
                 Log.d(TAG, "UpdateInBackgroundService: error: " + error.toString());
             }
-        }){
+        }) {
             @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
                 for (int i = 0; i < postdata.length; i++) {
                     String[] separated = postdata[i].split("#");
                     Log.d(TAG, "UpdateInBackgroundService: PATCH data:  " + separated[0] + "=" + separated[1]);
@@ -401,7 +399,7 @@ public class UpdateInBackgroundService extends IntentService {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<String, String>();
                 params.put("Accept", "application/json");
                 params.put("Content-Type", contentType);
                 params.put("x-lico-machine-updatekey", machine_updatekey);

@@ -3,10 +3,10 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-	android:background="#ffdddddd">
+    android:background="#ffdddddd">
 
-	<FrameLayout
-		android:id="@+id/logo"
+    <FrameLayout
+        android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="60dp"
@@ -15,7 +15,7 @@
         android:background="#fff0f0f0"
         android:padding="5dp" />
 
-	<TextView
+    <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
         android:layout_marginTop="20dp"
         android:padding="7dp"
         tools:background="@android:color/holo_green_light"
-        tools:text="@string/sent_data_successfully"/>
+        tools:text="@string/sent_data_successfully" />
 
     <TextView
         android:layout_width="fill_parent"
