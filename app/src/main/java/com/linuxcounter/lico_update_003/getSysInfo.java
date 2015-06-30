@@ -26,7 +26,7 @@ import java.io.InputStreamReader;
 
 public class getSysInfo extends Activity implements OnClickListener {
 
-    public String sAppVersion = "0.0.8";
+    public String sAppVersion = "0.0.9";
 
     static String aSendData[] = {};
 

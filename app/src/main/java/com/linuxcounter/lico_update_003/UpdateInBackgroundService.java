@@ -42,7 +42,7 @@ public class UpdateInBackgroundService extends IntentService {
 
     final static String TAG = "MyDebugOutput";
 
-    public String sAppVersion = "0.0.8";
+    public String sAppVersion = "0.0.9";
     // int sleepTime = 30; // Seconds
     int sleepTime = 28800; // Seconds
     static String senddata = null;
