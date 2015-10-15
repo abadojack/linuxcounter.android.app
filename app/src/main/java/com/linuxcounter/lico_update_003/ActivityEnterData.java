@@ -1,8 +1,12 @@
 package com.linuxcounter.lico_update_003;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -25,6 +29,39 @@ import java.io.InputStreamReader;
 public class ActivityEnterData extends Activity implements OnClickListener {
 
     final String TAG = "MyDebugOutput";
+
+    /**
+     * @return true if network Available otherwise false
+     */
+    public static boolean networkIsAvailable(Context context) {
+        if (context.checkCallingOrSelfPermission(Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+            return false;
+        }
+
+        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo netInfo = connMgr.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnected();
+    }
+
+    public static String convertStreamToString(InputStream is) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line).append("\n");
+        }
+        return sb.toString();
+    }
+
+    public static String getStringFromFile(String filePath) throws Exception {
+        File fl = new File(filePath);
+        FileInputStream fin = new FileInputStream(fl);
+        String ret = convertStreamToString(fin);
+        // Make sure you close all streams.
+        fin.close();
+        return ret;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,14 +108,8 @@ public class ActivityEnterData extends Activity implements OnClickListener {
 
         SaveToFile(machine_id + " " + machine_updatekey + "\n");
 
-        ConnectivityManager manager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        boolean is3g = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
-                .isConnected();
-        boolean isWifi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
-                .isConnected();
 
-        Log.i(TAG, "Connection 3G: " + is3g + " | Connection wifi: " + isWifi);
-        if (!is3g && !isWifi) {
+        if (!networkIsAvailable(this)) {
             Toast.makeText(getApplicationContext(),
                     "Please make sure, your network connection is ON ",
                     Toast.LENGTH_LONG).show();
@@ -86,25 +117,6 @@ public class ActivityEnterData extends Activity implements OnClickListener {
             startActivity(new Intent(this, getSysInfo.class));
             finish();
         }
-    }
-
-    public static String convertStreamToString(InputStream is) throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-        String line = null;
-        while ((line = reader.readLine()) != null) {
-            sb.append(line).append("\n");
-        }
-        return sb.toString();
-    }
-
-    public static String getStringFromFile(String filePath) throws Exception {
-        File fl = new File(filePath);
-        FileInputStream fin = new FileInputStream(fl);
-        String ret = convertStreamToString(fin);
-        // Make sure you close all streams.
-        fin.close();
-        return ret;
     }
 
     public void SaveToFile(String thisstring) {
@@ -115,7 +127,7 @@ public class ActivityEnterData extends Activity implements OnClickListener {
         File file = new File(filepath);
         file.mkdirs();
         File writeFile = new File(filepath, filename);
-        if (thisstring != "") {
+        if (!thisstring.equals("")) {
             try {
                 FileWriter filewriter = new FileWriter(writeFile);
                 BufferedWriter out = new BufferedWriter(filewriter);
